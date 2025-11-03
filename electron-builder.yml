@@ -1,0 +1,38 @@
+appId: com.testhelper.app
+productName: Test Helper
+directories:
+  output: release
+npmRebuild: false
+electronUpdaterCompatibility: ">=2.16"
+forceCodeSigning: false
+files:
+  - from: .
+    filter:
+      - package.json
+      - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+      - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - packages/main/dist/**/*
+  - packages/renderer/dist/**/*
+win:
+  icon: build/icon.png
+  signAndEditExecutable: false
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+mac:
+  icon: build/icon.icns
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+linux:
+  icon: build/icon.png
+  target:
+    - target: AppImage
+      arch:
+        - x64

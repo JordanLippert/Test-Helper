@@ -1,0 +1,35 @@
+# Dependências
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+
+# Build outputs
+dist/
+build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cursor
+.cursor/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Electron
+out/
+release/
+
+# Temporários
+*.tmp
+*.temp
+.env
+.env.local
+

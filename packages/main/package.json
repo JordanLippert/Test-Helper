@@ -1,0 +1,22 @@
+{
+  "name": "@test-helper/main",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "node -e \"require('fs').cpSync('src/../assets', 'dist/assets', {recursive: true})\"",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "active-win": "^8.1.0",
+    "electron-store": "^8.1.0",
+    "jimp": "^1.6.0",
+    "openai": "^4.0.0",
+    "tesseract.js": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
