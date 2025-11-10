@@ -258,9 +258,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **Jordan Oliveira**
 
-- 📧 Email: [seu-email@exemplo.com]
-- 💼 LinkedIn: [seu-linkedin]
-- 🐙 GitHub: [@seu-usuario]
+- 📧 Email: [lippertx11@gmail.com]
 
 ---
 
