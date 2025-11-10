@@ -1,274 +1,277 @@
-# 🧪 Test Helper - Assistente de IA para Testes
+# 🤖 Test Helper - Assistente de Desktop IA
 
-> Aplicativo desktop multiplataforma que captura tela, extrai texto via OCR e analisa com IA da OpenAI
+> Aplicativo desktop que captura sua tela, extrai texto via OCR e fornece respostas inteligentes usando IA.
 
-[![Electron](https://img.shields.io/badge/Electron-39.0.0-47848F?style=flat&logo=electron)](https://www.electronjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.0-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat&logo=react)](https://reactjs.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Electron](https://img.shields.io/badge/Electron-39.1.0-47848f)
+![React](https://img.shields.io/badge/React-18.3.1-61dafb)
+![Portable](https://img.shields.io/badge/instalador-portátil-brightgreen)
 
 ## ✨ Funcionalidades
 
-- 🎯 **Atalho Global** - Pressione `Ctrl+T` (ou `Cmd+T` no Mac) para capturar qualquer tela
-- 🖼️ **Captura Inteligente** - Captura automaticamente a região relevante da janela ativa
-- 📝 **OCR Avançado** - Extrai texto de imagens usando Tesseract.js
-- 🤖 **Análise com IA** - Integração com OpenAI GPT para análise contextual
-- 🎨 **Interface Moderna** - Design limpo e intuitivo com React
-- 💾 **Configurações Persistentes** - Salva suas preferências localmente
-- 🔒 **Seguro** - Armazenamento criptografado de API keys
-- 🌐 **Multiplataforma** - Windows, macOS e Linux
+- 📸 **Captura de Tela Inteligente**: Pressione `Ctrl+T` para capturar a janela ativa
+- 🔍 **OCR Aprimorado**: Extração de texto em cores com contraste e normalização otimizados
+- 🧠 **Parser Inteligente**: Identifica automaticamente perguntas numeradas e alternativas (NOVO!)
+- 🎯 **Validação de Questões**: Verifica se o texto capturado é realmente uma questão antes de processar (NOVO!)
+- 🤖 **Integração com OpenAI**: Respostas rápidas e precisas via GPT-4o-mini com prompt otimizado
+- 🎨 **Interface Moderna**: UI estilo Slack com popups discretos
+- ⚡ **Sistema de Tray**: Aplicativo roda na bandeja do sistema
+- 🔐 **Seguro**: Armazenamento local criptografado da chave API
+- 💰 **Econômico**: Modelo GPT-4o-mini (200x mais barato que GPT-4)
+- 🛡️ **Controle Total**: Toggle para ativar/desativar e evitar consumo acidental
+- 🚀 **Instalador Portável**: Build uma vez, funciona em qualquer máquina Windows (v1.1.0+)
+- 📱 **Adaptativo**: Detecção automática de resolução e escala DPI (125%, 150%, 200%) para captura precisa
+- 📝 **Logs Limpos**: Sistema de logging profissional sem caracteres especiais corrompidos
 
-## 📦 Instalação para Usuários
+## 🏗️ Arquitetura
 
-### Windows
+Este projeto é um **monorepo** organizado com workspaces npm:
 
-1. Baixe o instalador: `release/Test Helper Setup 1.0.0.exe`
-2. Execute o instalador e siga as instruções
-3. O aplicativo será iniciado automaticamente na bandeja do sistema
+```
+test-helper-v3/
+├── packages/
+│   ├── main/              # Processo principal do Electron (Backend)
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── preload.ts
+│   │   │   └── modules/
+│   │   │       ├── AI.ts          # Integração OpenAI
+│   │   │       ├── Capture.ts     # Captura de tela e OCR
+│   │   │       ├── TextParser.ts  # Parser inteligente de questões (NOVO!)
+│   │   │       ├── IPC.ts         # Comunicação entre processos
+│   │   │       └── Tray.ts        # Ícone da bandeja
+│   │   └── assets/
+│   │       └── icon.png
+│   │
+│   └── renderer/          # Interface React (Frontend)
+│       ├── src/
+│       │   ├── App.tsx
+│       │   ├── main.tsx
+│       │   └── pages/
+│       │       ├── Settings.tsx  # Tela de configurações
+│       │       └── Popup.tsx     # Popup de respostas
+│       └── index.html
+│
+├── build/                 # Ícones para distribuição
+├── package.json
+├── electron-builder.yml
+└── README.md
+```
 
-## 🚀 Guia de Uso Rápido
-
-### 1️⃣ Configuração Inicial
-
-1. Clique com botão direito no ícone da bandeja do sistema
-2. Selecione **"Configurações"**
-3. Cole sua **OpenAI API Key** (obtenha em: https://platform.openai.com/api-keys)
-4. Clique em **"💾 Salvar Chave"**
-5. Certifique-se que o toggle está **verde** (ativo)
-
-### 2️⃣ Capturando e Analisando
-
-1. Abra qualquer aplicativo (navegador, sistema, etc.)
-2. Pressione **`Ctrl+T`**
-3. Aguarde o processamento:
-   - 📸 Captura da tela
-   - 📝 Extração de texto (OCR)
-   - 🤖 Análise com IA
-   - 💬 Exibição da resposta
-
-## 🛠️ Desenvolvimento
+## 🚀 Instalação e Uso
 
 ### Pré-requisitos
 
-- **Node.js** 18+ (recomendado: 20+)
-- **npm** 9+
-- **Git**
+- **Node.js** 18+ e **npm** 9+
+- **Chave API da OpenAI** (obtenha em https://platform.openai.com/api-keys)
 
 ### Instalação
 
 ```bash
-# Clonar o repositório
-git clone <repository-url>
-cd test-helper
+# Clone ou navegue até o diretório
+cd Test-Helper-v3
 
-# Instalar todas as dependências
+# Instale as dependências
 npm install
 ```
 
-### Scripts de Desenvolvimento
+### Desenvolvimento
 
 ```bash
-# Iniciar em modo desenvolvimento
+# Terminal 1: Inicie o servidor de desenvolvimento do renderer
+cd packages/renderer
 npm run dev
 
-# Compilar apenas o backend (main process)
-npm run build:main
-
-# Compilar apenas o frontend (renderer)
-npm run build:renderer
-
-# Compilar tudo (ícones + main + renderer)
-npm run build
-
-# Gerar apenas os ícones
-npm run build:icons
+# Terminal 2: Compile o main e inicie o Electron
+cd ../..
+npm run dev
 ```
 
-### Build de Produção
+### Build para Produção
 
 ```bash
-# Gerar instalador completo (NSIS)
+# Build completo (main + renderer)
+npm run build
+
+# Criar instalador (NSIS para Windows)
 npm run dist
 
-# Gerar apenas o diretório (sem instalador)
+# Criar executável sem instalador (mais rápido para testes)
 npm run dist:dir
-
-# Gerar versão portátil
-npm run dist:portable
 ```
 
-**Saída:** Os executáveis estarão em `release/`
+**⏱️ Tempo de Build:** O processo `npm run dist` pode levar **3-5 minutos**. Durante o empacotamento, pode parecer travado na etapa de "packaging" - isso é normal! Aguarde até o processo completar.
 
-## 📁 Estrutura do Projeto
+**📦 Saída:**
+- **Instalador:** `release/Test Helper Setup 1.2.0.exe` (instalador completo)
+- **Portátil:** `release/win-unpacked/Test Helper.exe` (executável direto)
 
-```
-Test Helper/
-├── packages/
-│   ├── main/                          # Backend (Processo Principal)
-│   │   ├── src/
-│   │   │   ├── index.ts              # Entry point
-│   │   │   ├── preload.ts            # Ponte segura IPC
-│   │   │   └── modules/
-│   │   │       ├── AI.ts             # Integração OpenAI
-│   │   │       ├── Capture.ts        # Captura de tela + OCR
-│   │   │       ├── IPC.ts            # Comunicação entre processos
-│   │   │       └── Tray.ts           # Bandeja do sistema
-│   │   ├── assets/
-│   │   │   └── icon.png              # Ícone do app
-│   │   └── dist/                     # Build compilado
-│   │
-│   └── renderer/                      # Frontend (Interface)
-│       ├── src/
-│       │   ├── App.tsx               # Componente raiz
-│       │   ├── main.tsx              # Entry point React
-│       │   ├── @types/
-│       │   │   └── electron.d.ts     # Tipagens TypeScript
-│       │   └── pages/
-│       │       ├── Settings.tsx      # Tela de configurações
-│       │       └── Popup.tsx         # Popup de resposta
-│       ├── index.html
-│       ├── vite.config.ts
-│       └── dist/                     # Build compilado
-│
-├── build/                             # Ícones gerados (auto)
-├── release/                           # Executáveis gerados
-│   ├── Test Helper Setup 1.0.0.exe   # Instalador
-│   └── win-unpacked/                 # Versão portátil
-├── electron-builder.yml              # Config do builder
-├── package.json                      # Dependências raiz
-└── README.md                         # Este arquivo
-```
+**🖥️ Após Instalação:** 
+- O aplicativo aparecerá como um ícone na **bandeja do sistema** (system tray) no canto inferior direito da tela, próximo ao relógio
+- Um atalho será criado automaticamente na **Área de Trabalho** para fácil acesso
 
-## 🛠️ Scripts Disponíveis
+## ⚙️ Configuração
 
-| Script | Descrição |
-|--------|-----------|
-| `npm run dev` | Inicia em modo desenvolvimento |
-| `npm run build:main` | Compila backend (TypeScript → JavaScript) |
-| `npm run build:renderer` | Compila frontend (React + Vite) |
-| `npm run build:icons` | Gera ícones em múltiplos tamanhos |
-| `npm run build` | Compila tudo (ícones + main + renderer) |
-| `npm run dist` | Gera instalador NSIS completo |
-| `npm run dist:dir` | Gera apenas diretório (sem instalador) |
-| `npm run dist:portable` | Gera versão portátil |
+### Primeira Execução
 
-## 🔧 Stack Tecnológico
+1. **Localize o ícone** na bandeja do sistema (canto inferior direito, próximo ao relógio) 🔵
+2. **Clique com botão direito** no ícone → **Configurações**
+3. **Insira sua Chave API** da OpenAI (obtenha em https://platform.openai.com/api-keys)
+4. **Clique em Salvar**
+5. **Pronto!** Pressione `Ctrl+T` em qualquer janela para capturar e analisar
 
-### Core
-- **Electron** `39.0.0` - Framework para aplicativos desktop multiplataforma
-- **TypeScript** `5.6.0` - Tipagem estática e melhor DX
-- **React** `18.2.0` - Biblioteca UI declarativa
-- **Vite** `7.1.12` - Build tool ultrarrápido
+### 🔐 Segurança da Chave API OpenAI
+
+**Sua chave está 100% segura e privada!**
+
+- ✅ **Armazenamento Local:** A chave é salva em `%APPDATA%\Test Helper\config.json` (fora do repositório)
+- ✅ **Não Versionada:** Nunca será commitada no Git ou compartilhada
+- ✅ **Por Usuário:** Cada máquina/usuário tem sua própria configuração isolada
+- ✅ **Privacidade:** Apenas você tem acesso à sua chave
+- ✅ **Portabilidade:** Ao clonar o repo ou instalar em outra máquina, você precisará configurar novamente
+
+**Importante:** A chave é enviada **apenas** para a API oficial da OpenAI durante as consultas. Nunca é compartilhada com terceiros ou armazenada em nuvem.
+
+## 🎯 Como Usar
+
+1. **Abra qualquer aplicativo** com texto que deseja analisar
+2. **Pressione `Ctrl+T`** (ou `Cmd+T` no macOS)
+3. **Aguarde** - Popup de loading aparece no centro
+4. **Receba a resposta** - Popup discreto no canto inferior direito (estilo Slack)
+5. **Auto-fechamento** - Popup desaparece automaticamente após 5 segundos
+
+### Exemplo de Uso
+
+- 📚 Responder questões de testes e provas
+- 📖 Explicar conceitos em PDFs e documentos
+- 💻 Analisar código na tela
+- 📝 Resumir textos longos
+- 🎓 Auxiliar em estudos acadêmicos
+
+### 💡 Dica de Economia
+- O app usa **GPT-4o-mini** - 200x mais barato que GPT-4
+- Desative o toggle quando não estiver usando para evitar capturas acidentais
+- Cada captura custa aproximadamente $0.0001 (menos de 1 centavo)
+
+## 🛠️ Tecnologias Utilizadas
 
 ### Backend (Main Process)
-- **OpenAI** `4.0.0` - API de IA para análise de texto
-- **Tesseract.js** `5.0.0` - OCR (reconhecimento óptico de caracteres)
-- **active-win** `8.1.0` - Detecção de janela ativa
-- **electron-store** `8.1.0` - Persistência local de dados
-- **Jimp** `1.6.0` - Manipulação e processamento de imagens
+- **Electron** - Framework desktop multiplataforma
+- **TypeScript** - Tipagem estática
+- **OpenAI SDK** - Integração com GPT-4o-mini
+- **Tesseract.js** - OCR em cores com suporte a múltiplos idiomas
+- **Jimp** - Processamento de imagens (contraste, normalização)
+- **TextParser** - Parser inteligente de questões (NOVO!)
+- **active-win** - Detecção de janela ativa
+- **electron-store** - Armazenamento persistente
 
 ### Frontend (Renderer Process)
-- **React Router DOM** `6.20.0` - Roteamento entre páginas
-- **Inline Styles** - CSS-in-JS para componentes
+- **React 18** - UI reativa
+- **React Router** - Navegação entre páginas
+- **Vite** - Build tool rápido
+- **TypeScript** - Tipagem estática
+- **Design System** - Estilo Slack com cores roxas (#3f1f47)
 
-### Build & Deploy
-- **electron-builder** `26.0.12` - Empacotamento e distribuição
-- **Sharp** - Processamento de ícones
-- **NSIS** - Instalador para Windows
+## 📦 Scripts Disponíveis
 
-## 🎨 Interface do Usuário
+```bash
+# Desenvolvimento
+npm run dev              # Inicia o app em modo desenvolvimento
+npm run build:main       # Compila apenas o processo principal
+npm run build:renderer   # Compila apenas o renderer
+npm run build            # Compila tudo
 
-### Tela de Configurações
-- 📸 **Captura de Tela** - Exibe o atalho Ctrl+T em destaque
-- ⚡ **Status do App** - Toggle visual (verde/cinza) para ativar/desativar
-- 🔑 **API Key** - Campo seguro com botão mostrar/ocultar
-- 💾 **Salvar** - Feedback visual de sucesso/erro
+# Distribuição
+npm run dist             # Cria instalador completo
+npm run dist:dir         # Cria pasta com executável (sem instalador)
+```
 
-### Popup de Resposta
-- ⏳ **Loading** - Indicador durante processamento
-- ✅ **Sucesso** - Exibe resposta da IA
-- ❌ **Erro** - Mensagens de erro amigáveis
+## 🆕 Novidades da Versão Atual
 
-## 🔐 Segurança e Privacidade
+### Parser Inteligente de Questões
 
-- ✅ **Armazenamento Local** - API keys salvos apenas no seu computador
-- ✅ **Context Isolation** - Processos isolados para segurança
-- ✅ **No Telemetry** - Sem coleta de dados ou telemetria
-- ✅ **Code Signing Disabled** - Para desenvolvimento (habilite em produção)
-- ✅ **Sem Vulnerabilidades** - Execute `npm audit` para verificar
+A versão atual inclui um **sistema avançado de parsing** que resolve o problema de captura de perguntas:
+
+**Problema Resolvido:**
+- ✅ Perguntas numeradas (1., 2., 3.) agora são identificadas automaticamente
+- ✅ Alternativas (a, b, c, d, e) são extraídas e organizadas
+- ✅ Validação garante que apenas questões válidas são processadas
+- ✅ Texto é estruturado antes de enviar para a IA
+
+**Como Funciona:**
+1. OCR extrai o texto da tela
+2. TextParser identifica a estrutura da questão
+3. Texto é formatado de forma clara (QUESTÃO → PERGUNTA → ALTERNATIVAS)
+4. IA recebe texto estruturado e responde com precisão
+
+**Veja mais detalhes:** Consulte o arquivo `MELHORIAS-PARSER.md` para documentação completa.
 
 ## 🐛 Solução de Problemas
 
-### O atalho Ctrl+T não funciona
-1. Verifique se o app está ativo (toggle verde nas configurações)
-2. Certifique-se que o ícone está na bandeja do sistema
-3. Reinicie o aplicativo
+### Tela branca ao abrir Configurações
 
-### Erro ao capturar tela
-1. Verifique se a janela alvo está visível e não minimizada
-2. Aguarde alguns segundos e tente novamente
-3. Certifique-se que há texto visível na tela
+**Solução:** Este problema foi corrigido na v3! Os paths de carregamento do HTML agora estão corretos para produção.
 
-### Erro ao processar com IA
-1. Verifique sua chave da API OpenAI
-2. Confirme que tem créditos disponíveis na sua conta
-3. Teste sua conexão com a internet
+```typescript
+// Correção aplicada em Tray.ts e Capture.ts
+if (app.isPackaged) {
+  const htmlPath = path.join(process.resourcesPath, 'app.asar', 'packages', 'renderer', 'dist', 'index.html');
+  window.loadFile(htmlPath, { hash: '/settings' });
+} else {
+  window.loadURL('http://localhost:5173/#/settings');
+}
+```
 
-### Erro ao instalar dependências
-- Se encontrar erros com `active-win`, certifique-se de estar usando Node.js 18+
-- Execute `npm install --legacy-peer-deps` se houver conflitos de dependências
+### Erro "Chave da API não configurada"
 
-### Erro ao gerar build
-- Execute `npm run build` antes de `npm run dist`
-- Certifique-se que o diretório `release/` não está em uso
-- Feche todas as instâncias do app antes de buildar
+**Solução:** Abra as Configurações e insira uma chave válida da OpenAI.
 
-## 📚 Documentação Adicional
+### Captura não funciona ou captura apenas a barra de navegação
 
-- **[BLUEPRINT.md](BLUEPRINT.md)** - Arquitetura e design do sistema
-- **[LICENSE](LICENSE)** - Licença MIT
+**Solução:** 
+1. Verifique se o app está ativo (toggle nas Configurações)
+2. Certifique-se de que há uma janela aberta e ativa
+3. Tente pressionar `Ctrl+T` novamente
+4. **Novo na v1.2.0:** O app agora detecta automaticamente:
+   - O fator de escala do Windows (125%, 150%, 200%)
+   - A resolução física real da captura
+   - Ajusta os offsets dinamicamente para capturar o conteúdo correto
+   - Funciona perfeitamente em notebooks com diferentes configurações de DPI
+
+## 🔒 Segurança
+
+- ✅ **Context Isolation** habilitado
+- ✅ **Node Integration** desabilitado no renderer
+- ✅ **Preload script** seguro com `contextBridge`
+- ✅ **Chave API armazenada localmente** em `%APPDATA%\Test Helper\config.json` (não em código)
+- ✅ **Sem acesso direto** ao sistema de arquivos pelo renderer
+- ✅ **Dados não versionados** - Configurações nunca vão para o Git
+- ✅ **Isolamento por usuário** - Cada instalação tem suas próprias configurações
+
+## 📝 Licença
+
+MIT © Jordan Oliveira
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Para contribuir:
+Contribuições são bem-vindas! Sinta-se à vontade para:
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'feat: add amazing feature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+1. Fazer fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feat/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
+4. Push para a branch (`git push origin feat/nova-feature`)
+5. Abrir um Pull Request
 
-## 📝 Changelog
+## 📞 Suporte
 
-### v1.0.0 (2025-11-03)
-- ✨ Lançamento inicial
-- 🎯 Atalho global Ctrl+T
-- 📸 Captura inteligente de tela
-- 📝 OCR com Tesseract.js
-- 🤖 Integração com OpenAI GPT
-- 🎨 Interface moderna com React
-- 💾 Persistência de configurações
-- 🔒 Armazenamento seguro de API keys
+Se encontrar problemas ou tiver sugestões:
 
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 👤 Autor
-
-**Jordan Oliveira**
-
-- 📧 Email: [seu-email@exemplo.com]
-- 💼 LinkedIn: [seu-linkedin]
-- 🐙 GitHub: [@seu-usuario]
+1. Verifique a seção de **Solução de Problemas**
+2. Abra uma **Issue** no repositório
+3. Entre em contato com o desenvolvedor
 
 ---
 
-<div align="center">
-
-**Desenvolvido com ❤️ usando Electron + React + TypeScript**
-
-⭐ Se este projeto foi útil, considere dar uma estrela!
-
-</div>
+**Desenvolvido com ❤️ usando Electron + React + OpenAI**
 

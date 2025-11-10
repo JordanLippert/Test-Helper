@@ -7,7 +7,11 @@ export class TrayModule {
 
   public async createTray(): Promise<void> {
     // Criar ícone na bandeja do sistema
-    this.tray = new Tray(path.join(__dirname, '../assets/icon.png'));
+    const iconPath = app.isPackaged
+      ? path.join(process.resourcesPath, 'app.asar.unpacked', 'packages', 'main', 'dist', 'assets', 'icon.png')
+      : path.join(__dirname, '../assets/icon.png');
+    
+    this.tray = new Tray(iconPath);
     
     const contextMenu = Menu.buildFromTemplate([
       {
@@ -50,14 +54,16 @@ export class TrayModule {
     // Remover menu nativo completamente
     this.settingsWindow.removeMenu();
 
-    // Em desenvolvimento, carrega do servidor local
-    // Em produção, carrega do arquivo estático
-    if (process.env.NODE_ENV === 'development') {
-      this.settingsWindow.loadURL('http://localhost:5173/settings');
-    } else {
-      this.settingsWindow.loadFile(path.join(__dirname, '../../renderer/dist/index.html'), {
+    // CORREÇÃO CRÍTICA: Paths corretos para produção
+    if (app.isPackaged) {
+      // Em produção, o HTML está dentro do app.asar
+      const htmlPath = path.join(process.resourcesPath, 'app.asar', 'packages', 'renderer', 'dist', 'index.html');
+      this.settingsWindow.loadFile(htmlPath, {
         hash: '/settings'
       });
+    } else {
+      // Em desenvolvimento, usa o servidor Vite
+      this.settingsWindow.loadURL('http://localhost:5173/#/settings');
     }
 
     // Ocultar ao perder o foco (clicar fora)
@@ -93,3 +99,4 @@ export class TrayModule {
     }
   }
 }
+

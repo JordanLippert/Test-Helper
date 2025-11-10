@@ -13,8 +13,26 @@ files:
       - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
   - packages/main/dist/**/*
   - packages/renderer/dist/**/*
+  - por.traineddata
+  # Incluir dependências nativas do Tesseract.js
+  - node_modules/tesseract.js/**/*
+  - node_modules/tesseract.js-core/**/*
+  # Incluir dependências do Jimp
+  - node_modules/@jimp/**/*
+  - node_modules/jimp/**/*
+asarUnpack:
+  - "**/packages/main/dist/assets/**"
+  # Desempacotar arquivos críticos do Tesseract (WebAssembly e workers)
+  - "**/node_modules/tesseract.js/**/*.wasm"
+  - "**/node_modules/tesseract.js/**/*.js"
+  - "**/node_modules/tesseract.js-core/**/*"
+  # Desempacotar binários do Jimp/Sharp
+  - "**/node_modules/@jimp/**/*.node"
+  - "**/node_modules/sharp/**/*.node"
+extraResources:
+  - from: por.traineddata
+    to: por.traineddata
 win:
-  icon: build/icon.png
   signAndEditExecutable: false
   target:
     - target: nsis
@@ -23,6 +41,13 @@ win:
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
+  perMachine: false
+  allowElevation: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  license: LICENSE
+  deleteAppDataOnUninstall: false
+  shortcutName: "Test Helper"
 mac:
   icon: build/icon.icns
   target:
@@ -36,3 +61,4 @@ linux:
     - target: AppImage
       arch:
         - x64
+

@@ -10,7 +10,7 @@ interface ElectronAPI {
   onShowResponse: (callback: (data: { 
     status: 'success' | 'error';
     message: string;
-  }) => void) => void;
+  }) => void) => () => void;
 }
 
 // Expor funções seguras para o processo de renderização
@@ -27,11 +27,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
     status: 'success' | 'error';
     message: string;
   }) => void) => {
-    ipcRenderer.on('show-response', (_event, data) => callback(data));
+    const listener = (_event: Electron.IpcRendererEvent, data: any) => callback(data);
+    ipcRenderer.on('show-response', listener);
     
     // Retorna uma função de limpeza
     return () => {
-      ipcRenderer.removeAllListeners('show-response');
+      ipcRenderer.removeListener('show-response', listener);
     };
   }
 } as ElectronAPI);
+

@@ -21,9 +21,10 @@ export class IPCModule {
         }
         
         this.store.set('openai-key', key);
+        console.log('[OK] Chave da API salva com sucesso');
         
       } catch (error) {
-        console.error('Erro ao salvar a chave da API:', error);
+        console.error('[ERRO] Erro ao salvar a chave da API:', error);
         throw error;
       }
     });
@@ -35,7 +36,7 @@ export class IPCModule {
         return key || '';
         
       } catch (error) {
-        console.error('Erro ao obter a chave da API:', error);
+        console.error('[ERRO] Erro ao obter a chave da API:', error);
         throw error;
       }
     });
@@ -46,17 +47,13 @@ export class IPCModule {
         this.store.set('app-enabled', enabled);
         
         if (enabled) {
-          // Registrar atalho global novamente
-          globalShortcut.register('CommandOrControl+T', () => {
-            // O handler de captura já está registrado no index.ts
-          });
+          console.log('[OK] App ativado');
         } else {
-          // Remover atalho global
-          globalShortcut.unregister('CommandOrControl+T');
+          console.log('[OK] App desativado');
         }
         
       } catch (error) {
-        console.error('Erro ao alternar estado do app:', error);
+        console.error('[ERRO] Erro ao alternar estado do app:', error);
         throw error;
       }
     });
@@ -68,7 +65,7 @@ export class IPCModule {
         return enabled;
         
       } catch (error) {
-        console.error('Erro ao obter estado do app:', error);
+        console.error('[ERRO] Erro ao obter estado do app:', error);
         throw error;
       }
     });
@@ -79,3 +76,4 @@ export class IPCModule {
     });
   }
 }
+

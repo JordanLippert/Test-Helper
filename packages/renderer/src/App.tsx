@@ -1,17 +1,19 @@
 import React from 'react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Settings from './pages/Settings';
 import Popup from './pages/Popup';
 
 const App: React.FC = () => {
   return (
-    <MemoryRouter>
+    <HashRouter>
       <Routes>
         <Route path="/settings" element={<Settings />} />
         <Route path="/popup" element={<Popup />} />
+        <Route path="/" element={<Settings />} />
       </Routes>
-    </MemoryRouter>
+    </HashRouter>
   );
 };
 
 export default App;
+
