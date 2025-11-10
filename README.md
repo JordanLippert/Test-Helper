@@ -205,8 +205,6 @@ A versão atual inclui um **sistema avançado de parsing** que resolve o problem
 3. Texto é formatado de forma clara (QUESTÃO → PERGUNTA → ALTERNATIVAS)
 4. IA recebe texto estruturado e responde com precisão
 
-**Veja mais detalhes:** Consulte o arquivo `MELHORIAS-PARSER.md` para documentação completa.
-
 ## 🐛 Solução de Problemas
 
 ### Tela branca ao abrir Configurações
@@ -262,16 +260,6 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 3. Commit suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
 4. Push para a branch (`git push origin feat/nova-feature`)
 5. Abrir um Pull Request
-
-## 📞 Suporte
-
-Se encontrar problemas ou tiver sugestões:
-
-1. Verifique a seção de **Solução de Problemas**
-2. Abra uma **Issue** no repositório
-3. Entre em contato com o desenvolvedor
-
----
 
 **Desenvolvido com ❤️ usando Electron + React + OpenAI**
 
