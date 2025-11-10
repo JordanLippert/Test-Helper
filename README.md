@@ -251,7 +251,7 @@ if (app.isPackaged) {
 
 ## 📝 Licença
 
-MIT © Jordan Oliveira
+MIT © Jordan Oliveira ([@JordanLippert](https://github.com/JordanLippert))
 
 ## 🤝 Contribuindo
 
